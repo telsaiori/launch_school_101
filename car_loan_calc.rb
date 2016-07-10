@@ -4,20 +4,18 @@ end
 
 def vaild_number?(number)
   number.empty? || number.to_f < 0 || number.to_i == 0
-
 end
 
-
 prompt("Welcome to Mortgage Calculator!")
-loop do 
+loop do
   amount = ""
   loop do
     prompt("What is the the loan amount")
     amount = gets.chomp
-    unless vaild_number?(amount)
-      break
-    else
+    if vaild_number?(amount)
       prompt("Please enter valid number")
+    else
+      break
     end
   end
 
@@ -26,10 +24,10 @@ loop do
     prompt("what is your What is your APR?")
     prompt("(Example: 5 for 5% or 2.5 for 2.5%)")
     apr = gets.chomp
-    unless vaild_number?(apr)
-      break
-    else
+    if vaild_number?(apr)
       prompt("Please enter the valid APR")
+    else
+      break
     end
   end
 
@@ -37,10 +35,10 @@ loop do
   loop do
     prompt("what is your the loan duration in years")
     duration = gets.chomp
-    unless vaild_number?(duration)
-      break
-    else
+    if vaild_number?(duration)
       prompt("Please enter valid loan duration")
+    else
+      break
     end
   end
 
@@ -50,10 +48,10 @@ loop do
   monthly_payment = amount.to_f *
                     (monthly_interest * (1 + monthly_interest)**months) /
                     ((1 + monthly_interest)**months - 1)
-  prompt("Your monthly payment is #{sprintf("%.3f" , monthly_payment)}")
+  prompt("Your monthly payment is #{format('%.3f', monthly_payment)}")
   prompt("Another calculation? (Y for yes)")
   calc = gets.chomp
-  unless calc.downcase == "y"
+  unless calc.casecmp('y') == 0
     prompt("Thanks for using")
     prompt("Bye-bye")
     break
