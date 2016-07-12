@@ -1,13 +1,12 @@
 VAILD_INPUT = %w(rock paper scissors spock lizard)
-INPUT = {r: "rock", p:"paper", s:"scissors", v:"spock", l:"lizard"}
+INPUT = { r: "rock", p: "paper", s: "scissors", v: "spock", l: "lizard" }
 WIN_CONDITION = {
-    r: ["scissors", "lizard"],
-    p: ["rock", "spock"],
-    s: ["paper", "lizard"],
-    v: ["rock", "scissors"],
-    l: ["paper", "spock"]
+  r: %w(scissors lizard),
+  p: %w(rock spock),
+  s: %w(paper lizard),
+  v: %w(rock scissors),
+  l: %w(paper spock)
 }
-
 
 def prompt(message)
   puts "=> #{message}"
@@ -33,12 +32,11 @@ loop do
       prompt("Choose one: r as rock, p as paper, s as scissors, v as spock, l as lizard")
       player_choice = gets.chomp
       computer_choice = VAILD_INPUT.sample
-      if INPUT.has_key?(player_choice.to_sym)
+      if INPUT.key?(player_choice.to_sym)
         prompt("You choose #{INPUT[player_choice.to_sym]}, computer choose #{computer_choice}")
         if WIN_CONDITION[player_choice.to_sym].include?(computer_choice)
           player_score += 1
           prompt("You Win!!")
-          p player_score
         elsif INPUT[player_choice.to_sym] == computer_choice
           tie += 1
           prompt("Tie!!")
@@ -46,7 +44,7 @@ loop do
           computer_score += 1
           prompt("You Lose!!")
           p computer_score
-        end 
+        end
       else
         prompt("Please enter r as rock, p as paper, s as scissors, v as spock, l as lizard")
       end
