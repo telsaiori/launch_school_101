@@ -14,17 +14,7 @@ def prompt(message)
 end
 
 def result_record(player_choice, computer_choice, player_score, computer_score, tie)
-  if WIN_CONDITION[player_choice.to_sym].include?(computer_choice)
-    player_score += 1
-    prompt("You Win!!")
-    # player_score
-  elsif INPUT[player_choice.to_sym] == computer_choice
-    tie += 1
-    prompt("Tie!!")
-  else
-    computer_score += 1
-    prompt("You Lose!!")
-  end
+  
 end
 
 def display_result(player_score, computer_score)
@@ -43,14 +33,24 @@ loop do
   tie = 0
   prompt("Get 5 point to win")
   loop do
-    prompt("Choose one: #{VAILD_INPUT.join(', ')} r as rock, p as paper, s as scissors, v as spock, l as lizard")
-    player_choice = gets.chomp
-    computer_choice = VAILD_INPUT.sample
-    if player_score < 5 || computer_score < 5
-      p player_score
+    if player_score < 5 && computer_score < 5
+      prompt("Choose one: r as rock, p as paper, s as scissors, v as spock, l as lizard")
+      player_choice = gets.chomp
+      computer_choice = VAILD_INPUT.sample
       if INPUT.has_key?(player_choice.to_sym)
         prompt("You choose #{INPUT[player_choice.to_sym]}, computer choose #{computer_choice}")
-        result_record(player_choice, computer_choice, player_score, computer_score, tie)   
+        if WIN_CONDITION[player_choice.to_sym].include?(computer_choice)
+          player_score += 1
+          prompt("You Win!!")
+          p player_score
+        elsif INPUT[player_choice.to_sym] == computer_choice
+          tie += 1
+          prompt("Tie!!")
+        else
+          computer_score += 1
+          prompt("You Lose!!")
+          p computer_score
+        end 
       else
         prompt("Please enter r as rock, p as paper, s as scissors, v as spock, l as lizard")
       end
