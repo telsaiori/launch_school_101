@@ -13,10 +13,6 @@ def prompt(message)
   puts "=> #{message}"
 end
 
-def result_record(player_choice, computer_choice, player_score, computer_score, tie)
-  
-end
-
 def display_result(player_score, computer_score)
   if player_score > computer_score
     prompt("You Win 5 times, You are the winner")
